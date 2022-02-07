@@ -7,7 +7,7 @@ Mis archivos de configuración y scripts de shell.
 ```text
 dotfiles - Mis archivos de configuración y scripts de shell.
 
-Copyright (C) 2021 - Ricardo García Jiménez <ricardogj08@riseup.net>
+Copyright (C) 2021-2022 - Ricardo García Jiménez <ricardogj08@riseup.net>
 
 Autorizado en virtud de la Licencia de Apache, Versión 2.0 (la "Licencia");
 se prohíbe utilizar estos archivos excepto en cumplimiento de la Licencia.
