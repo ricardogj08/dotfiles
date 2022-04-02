@@ -21,7 +21,7 @@ make clean
   --sysconfdir=/etc \
   --with-lua="$path"
 
-make -j"$(nproc)"
+make -j"$(nproc)" || exit
 
 while :; do
   su -c 'make install' && break

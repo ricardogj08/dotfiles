@@ -64,7 +64,7 @@ make clean
   # --http-uwsgi-temp-path=/var/tmp/"$program"/uwsgi \
   # --http-scgi-temp-path=/var/tmp/"$program"/scgi \
 
-make -j"$(nproc)"
+make -j"$(nproc)" || exit
 
 while :; do
   su -c 'make install' && break
