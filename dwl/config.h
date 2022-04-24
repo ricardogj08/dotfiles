@@ -1,6 +1,7 @@
 /* appearance */
 static const int sloppyfocus        = 1;  /* focus follows mouse */
 static const unsigned int borderpx  = 1;  /* border pixel of windows */
+static const int lockfullscreen     = 1;  /* 1 will force focus on the fullscreen window */
 static const float rootcolor[]      = {0.3, 0.3, 0.3, 1.0};
 static const float bordercolor[]    = {0.5, 0.5, 0.5, 1.0};
 static const float focuscolor[]     = {1.0, 0.0, 0.0, 1.0};
@@ -12,8 +13,8 @@ static const Rule rules[] = {
 	/* app_id     title       tags mask     isfloating   monitor */
 	/* examples:
 	{ "Gimp",     NULL,       0,            1,           -1 },
-	{ "firefox",  NULL,       1 << 8,       0,           -1 },
 	*/
+	{ "firefox",  NULL,       0,            0,           -1 },
 };
 
 /* layout(s) */
@@ -24,16 +25,14 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 };
 
-/* monitors
- * The order in which monitors are defined determines their position.
- * Non-configured monitors are always added to the left. */
+/* monitors */
 static const MonitorRule monrules[] = {
-	/* name       mfact nmaster scale layout       rotate/reflect x y */
+	/* name       mfact nmaster scale layout       rotate/reflect */
 	/* example of a HiDPI laptop monitor:
-	{ "eDP-1",    0.5,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 0, 0 },
+	{ "eDP-1",    0.5,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
 	*/
 	/* defaults */
-	{ NULL,       0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 0, 0 },
+	{ NULL,       0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
 };
 
 /* keyboard */
@@ -53,6 +52,7 @@ static const int repeat_delay = 600;
 static const int tap_to_click = 1;
 static const int natural_scrolling = 0;
 
+/* If you want to use the windows key change this to WLR_MODIFIER_LOGO */
 #define MODKEY WLR_MODIFIER_ALT
 #define TAGKEYS(KEY,SKEY,TAG) \
 	{ MODKEY,                    KEY,            view,            {.ui = 1 << TAG} }, \
@@ -69,6 +69,7 @@ static const char *menucmd[]  = { "bemenu-run", NULL };
 static const char *firefox[]  = { "firefox", NULL };
 static const char *telegram[] = { "sh", "-c", "${HOME}/pkgs/Telegram/Telegram", NULL };
 static const char *vscode[]   = { "code", "--enable-features=UseOzonePlatform", "--ozone-platform=wayland", NULL };
+static const char *mousepad[] = { "mousepad", NULL };
 static const char *briup[]    = { "light", "-A", "5", NULL };
 static const char *bridown[]  = { "light", "-U", "5", NULL };
 static const char *voldown[]  = { "amixer", "sset", "Master", "5%-", NULL };
@@ -83,6 +84,7 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_F,          spawn,          {.v = firefox} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_T,          spawn,          {.v = telegram} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_V,          spawn,          {.v = vscode} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_M,          spawn,          {.v = mousepad} },
 	/* { 0, XKB_KEY_XF86KbdBrightnessUp,                spawn,          {.v = briup} }, */
 	/* { 0, XKB_KEY_XF86KbdBrightnessDown,              spawn,          {.v = bridown} }, */
 	{ MODKEY,                    XKB_KEY_F1,         spawn,          {.v = briup} },
@@ -104,7 +106,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
-	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+	{ MODKEY,                    XKB_KEY_e,        togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },

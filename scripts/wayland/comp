@@ -1,0 +1,15 @@
+#!/bin/sh
+
+XDG_RUNTIME_DIR=/tmp/xdg-runtime-$(id -u)
+QT_QPA_PLATFORM=wayland
+SDL_VIDEODRIVER=wayland
+MOZ_ENABLE_WAYLAND=1
+
+export XDG_RUNTIME_DIR \
+       QT_QPA_PLATFORM \
+       SDL_VIDEODRIVER \
+       MOZ_ENABLE_WAYLAND
+
+mkdir -p "$XDG_RUNTIME_DIR"
+
+exec dwl -s "$HOME"/Documentos/repos/github/dotfiles/scripts/wayland/run.sh

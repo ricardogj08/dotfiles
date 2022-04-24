@@ -12,7 +12,7 @@ curl -fLO https://luarocks.org/releases/"$tarname"
 
 tar xvf "$tarname"
 
-cd "$program"-"$version" || exit
+cd "$program"-"$version" || exit 1
 
 make clean
 
@@ -21,7 +21,7 @@ make clean
   --sysconfdir=/etc \
   --with-lua="$path"
 
-make -j"$(nproc)" || exit
+make -j"$(nproc)" || exit 1
 
 while :; do
   su -c 'make install' && break

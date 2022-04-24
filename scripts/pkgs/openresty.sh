@@ -13,7 +13,7 @@ curl -fLO https://openresty.org/download/"$tarname"
 
 tar xvf "$tarname"
 
-cd "$program"-"$version" || exit
+cd "$program"-"$version" || exit 1
 
 make clean
 
@@ -64,7 +64,7 @@ make clean
   # --http-uwsgi-temp-path=/var/tmp/"$program"/uwsgi \
   # --http-scgi-temp-path=/var/tmp/"$program"/scgi \
 
-make -j"$(nproc)" || exit
+make -j"$(nproc)" || exit 1
 
 while :; do
   su -c 'make install' && break
