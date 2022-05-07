@@ -4,7 +4,7 @@
 #
 
 program=luarocks
-version=3.8.0
+version=3.9.0
 tarname=${program}-${version}.tar.gz
 path=/opt/openresty/luajit
 
