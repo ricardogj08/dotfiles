@@ -1,0 +1,7 @@
+set indicator
+set linenumbers
+set softwrap
+set tabsize 2
+set tabstospaces
+set unix
+include "~/pkgs/nanorc/*.nanorc"

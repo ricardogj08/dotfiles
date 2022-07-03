@@ -6,7 +6,7 @@
 #
 
 program=openresty
-version=1.19.9.1
+version=1.21.4.1
 tarname=${program}-${version}.tar.gz
 
 curl -fLO https://openresty.org/download/"$tarname"
